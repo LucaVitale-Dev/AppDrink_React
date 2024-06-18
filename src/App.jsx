@@ -15,6 +15,7 @@ function App() {
       if (response.data.drinks) {
         setDrinkList(response.data.drinks);
       } else {
+        setDrinkList([]);
       }
     } catch (error) {
       console.error("Errore durante il recupero dei dati:", error);

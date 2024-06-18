@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaRegHeart } from "react-icons/fa6";
 
 function Card({ el }) {
   const [visible, setVisible] = useState(false);
@@ -35,8 +36,11 @@ function Card({ el }) {
       <h4 className=" font-Playwrite italic text-2xl">{el.strDrink}</h4>
 
       {visible && (
-        <div className="p-6 w-full h-full bg-black absolute bg-opacity-90 flex flex-col justify-evenly ">
-          <h3 className=" text-2xl font-bold  text-center">{el.strDrink}</h3>
+        <div className="p-6 w-full h-full bg-black absolute bg-opacity-90 flex flex-col justify-evenly overflow-auto ">
+          <h3 className=" flex items-center text-2xl font-bold justify-center gap-2">
+            <FaRegHeart />
+            {el.strDrink}
+          </h3>
           <p className=" text-center ">{el.strAlcoholic}</p>
           <div className=" grid grid-cols-2 justify-items-center">
             <div>{renderIngredients()}</div>
