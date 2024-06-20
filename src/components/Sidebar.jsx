@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
+import DrinkContext from "../utility/drinkContext";
 
 function Sidebar({ alcolichFilter }) {
+  const { drinkList, setDrinkList, drinkPref, setDrinkPref } =
+    useContext(DrinkContext);
+
   return (
     <div className=" border-r-2 border-black p-12 flex flex-col justify-between">
       <h3 className=" font-bold">LOGO</h3>
       <div className=" flex flex-col gap-2">
-        <p>Opzione da implementare</p>
+        <p onClick={() => setDrinkList(drinkPref)}>Drink Preferiti</p>
         <p>Opzione da implementare</p>
       </div>
       <div className=" flex flex-col gap-3">

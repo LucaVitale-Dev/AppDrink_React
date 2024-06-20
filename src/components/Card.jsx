@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { BsXLg } from "react-icons/bs";
 import { FaRegHeart } from "react-icons/fa6";
+import DrinkContext from "../utility/drinkContext";
 
 function Card({ el }) {
+  const { drinkPref, setDrinkPref } = useContext(DrinkContext);
+
+  const [heart, setHeart] = useState(false);
   const [visible, setVisible] = useState(false);
 
   const renderIngredients = () => {
@@ -26,6 +31,21 @@ function Card({ el }) {
     return quantity;
   };
 
+  //funzione per cuore
+  const handleHeart = (el) => {
+    const updatedHeart = !heart;
+
+    setHeart(updatedHeart);
+
+    setDrinkPref((prevState) => {
+      if (updatedHeart) {
+        return [...prevState, el];
+      } else {
+        return prevState.filter((drink) => drink.id !== el.id);
+      }
+    });
+  };
+
   return (
     <div
       onMouseEnter={() => setVisible(true)}
@@ -38,7 +58,10 @@ function Card({ el }) {
       {visible && (
         <div className="p-6 w-full h-full bg-black absolute bg-opacity-90 flex flex-col justify-evenly overflow-auto ">
           <h3 className=" flex items-center text-2xl font-bold justify-center gap-2">
-            <FaRegHeart />
+            <FaRegHeart
+              className={heart && ` text-red-600 `}
+              onClick={() => handleHeart(el)}
+            />
             {el.strDrink}
           </h3>
           <p className=" text-center ">{el.strAlcoholic}</p>
