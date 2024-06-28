@@ -1,34 +1,58 @@
 import React, { useContext, useEffect } from "react";
 import DrinkContext from "../utility/drinkContext";
+import alphabetArray from "../utility/alphabet";
+import logo from "../assets/logo.png";
 
 function Sidebar({ alcolichFilter }) {
-  const { drinkList, setDrinkList, drinkPref, setDrinkPref } =
+  const { drinkList, setDrinkList, drinkPref, setDrinkPref, dataCall } =
     useContext(DrinkContext);
 
   return (
-    <div className=" border-r-2 border-black p-12 flex flex-col justify-between">
-      <h3 className=" font-bold">LOGO</h3>
-      <div className=" flex flex-col gap-2">
-        <p onClick={() => setDrinkList(drinkPref)}>Drink Preferiti</p>
-        <p>Opzione da implementare</p>
-      </div>
-      <div className=" flex flex-col gap-3">
-        <h3 className=" uppercase text-2xl">filter:</h3>
-        <p className=" cursor-pointer" onClick={() => alcolichFilter("vodka")}>
-          Vodka
-        </p>
-        <p className=" cursor-pointer" onClick={() => alcolichFilter("gin")}>
-          Gin
-        </p>
-        <p className=" cursor-pointer" onClick={() => alcolichFilter("rum")}>
-          Rum
-        </p>
+    <div className="  p-10 grid  md:grid-cols-2 justify-items-center items-center ">
+      <img className=" w-[250px]" src={logo} alt="" />
+
+      <div className=" flex flex-col items-center gap-2">
         <p
-          className=" cursor-pointer"
-          onClick={() => alcolichFilter("tequila")}
+          className="uppercase text-xl cursor-pointer"
+          onClick={() => setDrinkList(drinkPref)}
         >
-          Tequila
+          Drink Preferiti
         </p>
+
+        <h3 className=" uppercase text-xl">filter for alcolich :</h3>
+        <div className=" flex gap-3 items-center text-white">
+          <p
+            className=" cursor-pointer"
+            onClick={() => alcolichFilter("vodka")}
+          >
+            Vodka
+          </p>
+          <p className=" cursor-pointer" onClick={() => alcolichFilter("gin")}>
+            Gin
+          </p>
+          <p className=" cursor-pointer" onClick={() => alcolichFilter("rum")}>
+            Rum
+          </p>
+          <p
+            className=" cursor-pointer"
+            onClick={() => alcolichFilter("tequila")}
+          >
+            Tequila
+          </p>
+        </div>
+        <h3 className=" uppercase text-xl">filter for letter:</h3>
+
+        <div className="flex gap-1 md:gap-3 text-white">
+          {alphabetArray.map((letter) => (
+            <button
+              className="uppercase"
+              onClick={() => dataCall(letter)}
+              key={letter}
+            >
+              {letter}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
